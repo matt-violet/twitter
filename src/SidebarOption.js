@@ -1,5 +1,5 @@
-import React from 'react'
-import './SidebarOption.css'
+import React from 'react';
+import './SidebarOption.css';
 
 function SidebarOption({ active, text, Icon }) {
   return (
@@ -10,4 +10,4 @@ function SidebarOption({ active, text, Icon }) {
   )
 }
 
-export default SidebarOption
+export default SidebarOption;
