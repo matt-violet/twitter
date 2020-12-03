@@ -6,7 +6,6 @@ import Post from './Post';
 function Feed() {
   return (
     <div className="feed">
-      {/* header */}
       <div className="feed__header">
         <h2>Home</h2>
       </div>
@@ -19,4 +18,4 @@ function Feed() {
   )
 }
 
-export default Feed
+export default Feed;
