@@ -1,5 +1,6 @@
 .widgets {
   flex: 0.3;
+  margin: 10px 0;
 }
 
 .widgets__input {
@@ -8,7 +9,6 @@
   background-color: var(--twitter-background);
   padding: 10px;
   border-radius: 20px;
-  margin-top: 10px;
   margin-left: 20px;
 }
 

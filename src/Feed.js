@@ -3,17 +3,20 @@ import './Feed.css';
 import TweetBox from './TweetBox';
 import Post from './Post';
 
-function Feed() {
+function Feed(props) {
+  const posts = props.timeline.map((tweet) => {
+    return <Post className="feed__post" tweet={tweet} key={tweet.id} />
+  })
+
   return (
     <div className="feed">
       <div className="feed__header">
         <h2>Home</h2>
       </div>
       <TweetBox />
-      <Post />
-      <Post />
-      <Post />
-      <Post />
+      <div>
+        {posts}
+      </div>
     </div>
   )
 }

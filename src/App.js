@@ -27,7 +27,7 @@ class App extends Component {
   render() {
     const { isLoggedIn, timeline } = this.state;
 
-    if (isLoggedIn) {
+    if (isLoggedIn && timeline) {
       return (
         <div className="app">
           <Sidebar />
