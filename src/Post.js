@@ -28,10 +28,9 @@ function Post(props) {
             <p>{props.tweet.text}</p>
           </div>
         </div>
-        {/* <img
-          src="https://media3.giphy.com/media/65ATdpi3clAdjomZ39/giphy.gif"
-          alt=""
-        /> */}
+        {
+          props.tweet.extended_media && (<img src={props.tweet.extended_entities.media[0].display_url} alt=""/>)
+        }
         <div className="post__footer">
           <ChatBubbleOutlineIcon className="post__icon" fontSize="small" />
           <RepeatIcon className="post__icon" fontSize="small" />

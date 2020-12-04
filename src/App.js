@@ -4,15 +4,18 @@ import SignIn from './SignIn';
 import Sidebar from './Sidebar';
 import Feed from './Feed';
 import Widgets from './Widgets';
+import Profile from './Profile';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isLoggedIn: false,
+      currentPage: "",
       timeline: []
     }
     this.signInUser = this.signInUser.bind(this);
+    this.updateCurrentPage = this.updateCurrentPage.bind(this);
   }
 
   async signInUser() {
@@ -20,18 +23,35 @@ class App extends Component {
     const res = await response.json();
     this.setState({
       isLoggedIn: true,
+      currentPage: "Home",
       timeline: res
     })
   }
 
-  render() {
-    const { isLoggedIn, timeline } = this.state;
+  updateCurrentPage(page) {
+    this.setState({
+      currentPage: page
+    })
+  }
 
-    if (isLoggedIn && timeline) {
+  render() {
+    let { isLoggedIn, currentPage, timeline } = this.state;
+    const renderCurrentPage = () => {
+      switch(currentPage) {
+        case "Home":
+          return <Feed timeline={timeline} />;
+        case "Profile":
+          return <Profile />
+      }
+    }
+
+    if (isLoggedIn) {
       return (
         <div className="app">
-          <Sidebar />
-          <Feed timeline={timeline} />
+          <Sidebar updateCurrentPage={this.updateCurrentPage} />
+          <div className="currentPage">
+            {renderCurrentPage(currentPage)}
+          </div>
           <Widgets />
         </div>
       )

@@ -3,8 +3,8 @@ import './Feed.css';
 import TweetBox from './TweetBox';
 import Post from './Post';
 
-function Feed(props) {
-  const posts = props.timeline.map((tweet) => {
+function Feed({ timeline }) {
+  const posts = timeline.map((tweet) => {
     return <Post className="feed__post" tweet={tweet} key={tweet.id} />
   })
 

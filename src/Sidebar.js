@@ -13,17 +13,17 @@ import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import { Button } from '@material-ui/core';
 
-function Sidebar() {
+function Sidebar({ updateCurrentPage }) {
   return (
     <div className="sidebar">
       <TwitterIcon className="sidebar__twitterIcon"/>
-      <SidebarOption active Icon={HomeIcon} text="Home" />
+      <SidebarOption active Icon={HomeIcon} text="Home" updateCurrentPage={updateCurrentPage} />
       <SidebarOption Icon={SearchIcon} text="Explore" />
       <SidebarOption Icon={NotificationsNoneIcon} text="Notifications" />
       <SidebarOption Icon={MailOutlineIcon} text="Messages" />
       <SidebarOption Icon={BookmarkBorderIcon} text="Bookmarks" />
       <SidebarOption Icon={ListAltIcon} text="Lists" />
-      <SidebarOption Icon={PermIdentityIcon} text="Profile" />
+      <SidebarOption Icon={PermIdentityIcon} text="Profile" updateCurrentPage={updateCurrentPage} />
       <SidebarOption Icon={MoreHorizIcon} text="More" />
       <Button variant="outlined" className="sidebar__tweet" fullWidth>Tweet</Button>
     </div>
