@@ -11,6 +11,7 @@ class App extends Component {
     this.state = {
       isLoggedIn: false,
       currentPage: "",
+      featuredUser: "ayedoemateo",
       homeTimeline: [],
       profileTimeline: [],
       userTimeline: []
@@ -26,35 +27,55 @@ class App extends Component {
     this.setState({
       isLoggedIn: true,
       currentPage: "Home",
-      featuredProfile: "ayedoemateo",
       homeTimeline: res
     })
   }
 
   async visitUserTimeline(user) {
+    const { profileTimeline } = this.state;
+
+    if (user === 'ayedoemateo') {
+      if (profileTimeline.length) {
+        this.setState({
+          currentPage: "Profile",
+          featuredUser: "ayedoemateo"
+        })
+        return;
+      } else {
+        const response = await fetch(`/timeline/${user}`);
+        const res = await response.json();
+        this.setState({
+          currentPage: "Profile",
+          featuredUser: "ayedoemateo",
+          profileTimeline: res
+        })
+      }
+      return;
+    }
     const response = await fetch(`/timeline/${user}`);
     const res = await response.json();
     this.setState({
       currentPage: "Profile",
-      featuredProfile: user,
-      userTimeline: res
+      userTimeline: res,
+      featuredUser: user
     })
   }
 
   updateCurrentPage(page) {
     this.setState({
-      currentPage: page
+      currentPage: page,
+      featuredUser: "ayedoemateo"
     })
   }
 
   render() {
-    let { isLoggedIn, currentPage, homeTimeline, userTimeline } = this.state;
+    let { isLoggedIn, currentPage, homeTimeline, featuredUser, profileTimeline, userTimeline } = this.state;
     const renderCurrentPage = () => {
       switch(currentPage) {
         case "Home":
           return <Feed timeline={homeTimeline} visitUserTimeline={this.visitUserTimeline} />;
         case "Profile":
-          return <Feed timeline={userTimeline} visitUserTimeline={this.visitUserTimeline} />
+          return <Feed timeline={featuredUser === "ayedoemateo" ? profileTimeline : userTimeline} visitUserTimeline={this.visitUserTimeline} />
         default:
           return <Feed timeline={homeTimeline} visitUserTimeline={this.visitUserTimeline} />;
       }
