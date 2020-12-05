@@ -3,9 +3,14 @@ import './Feed.css';
 import TweetBox from './TweetBox';
 import Post from './Post';
 
-function Feed({ timeline }) {
+function Feed({ timeline, visitUserTimeline }) {
   const posts = timeline.map((tweet) => {
-    return <Post className="feed__post" tweet={tweet} key={tweet.id} />
+    return <Post
+      className="feed__post"
+      tweet={tweet}
+      key={tweet.id}
+      visitUserTimeline={visitUserTimeline}
+    />
   })
 
   return (

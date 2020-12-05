@@ -29,6 +29,10 @@
   font-size: 15px;
 }
 
+.post__header {
+  width: auto;
+}
+
 .post__headerText > h3 {
   font-size: 15px;
   margin-bottom: 5px;

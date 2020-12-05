@@ -4,7 +4,6 @@ import SignIn from './SignIn';
 import Sidebar from './Sidebar';
 import Feed from './Feed';
 import Widgets from './Widgets';
-import Profile from './Profile';
 
 class App extends Component {
   constructor(props) {
@@ -12,19 +11,33 @@ class App extends Component {
     this.state = {
       isLoggedIn: false,
       currentPage: "",
-      timeline: []
+      homeTimeline: [],
+      profileTimeline: [],
+      userTimeline: []
     }
     this.signInUser = this.signInUser.bind(this);
     this.updateCurrentPage = this.updateCurrentPage.bind(this);
+    this.visitUserTimeline = this.visitUserTimeline.bind(this);
   }
 
   async signInUser() {
-    const response = await fetch('/timeline', { mode: 'no-cors' });
+    const response = await fetch('/timeline');
     const res = await response.json();
     this.setState({
       isLoggedIn: true,
       currentPage: "Home",
-      timeline: res
+      featuredProfile: "ayedoemateo",
+      homeTimeline: res
+    })
+  }
+
+  async visitUserTimeline(user) {
+    const response = await fetch(`/timeline/${user}`);
+    const res = await response.json();
+    this.setState({
+      currentPage: "Profile",
+      featuredProfile: user,
+      userTimeline: res
     })
   }
 
@@ -35,20 +48,22 @@ class App extends Component {
   }
 
   render() {
-    let { isLoggedIn, currentPage, timeline } = this.state;
+    let { isLoggedIn, currentPage, homeTimeline, userTimeline } = this.state;
     const renderCurrentPage = () => {
       switch(currentPage) {
         case "Home":
-          return <Feed timeline={timeline} />;
+          return <Feed timeline={homeTimeline} visitUserTimeline={this.visitUserTimeline} />;
         case "Profile":
-          return <Profile />
+          return <Feed timeline={userTimeline} visitUserTimeline={this.visitUserTimeline} />
+        default:
+          return <Feed timeline={homeTimeline} visitUserTimeline={this.visitUserTimeline} />;
       }
     }
 
     if (isLoggedIn) {
       return (
         <div className="app">
-          <Sidebar updateCurrentPage={this.updateCurrentPage} />
+          <Sidebar updateCurrentPage={this.updateCurrentPage} visitUserTimeline={this.visitUserTimeline} />
           <div className="currentPage">
             {renderCurrentPage(currentPage)}
           </div>
