@@ -3,6 +3,7 @@ import './App.css';
 import SignIn from './SignIn';
 import Sidebar from './Sidebar';
 import Feed from './Feed';
+import Profile from './Profile';
 import Widgets from './Widgets';
 
 class App extends Component {
@@ -75,7 +76,7 @@ class App extends Component {
         case "Home":
           return <Feed timeline={homeTimeline} visitUserTimeline={this.visitUserTimeline} />;
         case "Profile":
-          return <Feed timeline={featuredUser === "ayedoemateo" ? profileTimeline : userTimeline} visitUserTimeline={this.visitUserTimeline} />
+          return <Profile timeline={profileTimeline} visitUserTimeline={this.visitUserTimeline} />
         default:
           return <Feed timeline={homeTimeline} visitUserTimeline={this.visitUserTimeline} />;
       }

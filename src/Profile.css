@@ -1,0 +1,133 @@
+.profile {
+  flex: 0.4;
+  border-right: 1px solid var(--twitter-background);
+}
+
+.profile__header {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  background-color: white;
+  z-index: 100;
+  border: 1px solid var(--twitter-background);
+  padding: 15px 20px; 
+}
+
+.profile__arrowContainer {
+  height: 100%;
+  display: inline-block;
+  margin-right: 20px;
+  vertical-align: middle;
+}
+
+.profile__backArrow {
+  color: var(--twitter-color);
+}
+
+.profile__headerText {
+  display: inline-block;
+}
+
+.profile__tweetCount {
+  font-size: 14px;
+  color: grey;
+}
+
+.profile__backgroundImg {
+  width: 100%;
+}
+
+.profile__contents {
+  display: flex;
+  justify-content: space-between;
+}
+
+.profile__contentsLeftSide {
+  margin-left: 15px;
+  margin-top: -67.5px;
+}
+
+.profile__profileImg {
+  width: 135px;
+  border-radius: 50%;
+  border: 4px solid white;
+}
+
+.profile__userName {
+  font-size: 19px;
+}
+
+.profile__screenName {
+  font-size: 15px;
+  font-weight: 500;
+  color: grey;
+  margin-bottom: 8px;
+}
+
+.profile__locationIcon, .profile__calendarIcon {
+  color: grey;
+  font-size: 16px !important;
+}
+
+.profile__location, .profile__joinedDate {
+  display: inline-block;
+  color: grey;
+  margin: 0 10px;
+}
+
+.profile__follow {
+  margin-top: 8px;
+}
+
+.profile__followingText, .profile__followersText {
+  display: inline-block !important;
+  color: grey;
+  margin-right: 10px;
+}
+
+.profile__editBtn {
+  margin: 10px 15px;
+  height: 40px;
+  padding: 10px 15px;
+  border-radius: 30px;
+  border: 1px solid var(--twitter-color);
+  background: white;
+  color: var(--twitter-color);
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.profile__editBtn:hover {
+  background: var(--twitter-background);
+  transition: .3s;
+  cursor: pointer;
+}
+
+.profile__links {
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid lightgrey;
+}
+
+.profile__link {
+  padding: 15px;
+  font-size: 15px;
+  font-weight: 700;
+  color: grey;
+  flex: 4;
+  text-align: center;
+}
+
+.profile__link:hover {
+  background: var(--twitter-background);
+  color: var(--twitter-color);
+  transition: .3s;
+  cursor: pointer;
+}
+
+.profile__link--selected {
+  color: var(--twitter-color);
+  border-bottom: 2px solid var(--twitter-color);
+}
