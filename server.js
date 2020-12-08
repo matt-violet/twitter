@@ -25,7 +25,14 @@ app.get('/timeline', (req, res) => {
 
 app.get('/timeline/:user', (req, res) => {
   client.get(`https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=${req.params.user}`, (error, data) => {
-    console.log('fetching user feed')
+    console.log(`fetching ${req.params.user}'s feed`)
+    error ? console.log('ERROR: ', error) : res.send(data)
+  })
+})
+
+app.get('/users/:user', (req, res) => {
+  client.get(`https://api.twitter.com/1.1/users/show.json?screen_name=${req.params.user}`, (error, data) => {
+    console.log(`fetching user ${req.params.user}`)
     error ? console.log('ERROR: ', error) : res.send(data)
   })
 })

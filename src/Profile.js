@@ -6,14 +6,14 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import DateRangeIcon from '@material-ui/icons/DateRange';
 
-function Profile({ timeline, visitUserTimeline }) {
-  const user = timeline[0].user
+function Profile({ timeline, visitUserProfile }) {
+  const user = timeline[0].user;
   const posts = timeline.map((tweet) => {
     return <Post
       className="profile__post"
       tweet={tweet}
       key={tweet.id}
-      visitUserTimeline={visitUserTimeline}
+      visitUserProfile={visitUserProfile}
     />
   });
 
@@ -45,7 +45,7 @@ function Profile({ timeline, visitUserTimeline }) {
             <span className="profile__followersText">Followers</span>
           </div>
         </div>
-        <button className="profile__editBtn">Edit profile</button>
+        <button className="profile__editBtn">{user.screen_name === "ayedoemateo" ? "Edit profile" : "Following"}</button>
       </div>
       <div className="profile__links">
         <div className="profile__link profile__link--selected">Tweets</div>

@@ -3,13 +3,13 @@ import './Feed.css';
 import TweetBox from './TweetBox';
 import Post from './Post';
 
-function Feed({ timeline, visitUserTimeline }) {
-  const posts = timeline.map((tweet) => {
+function Feed({ homeTimeline, loggedInUserAvatarUrl, visitUserProfile }) {
+  const posts = homeTimeline.map((tweet) => {
     return <Post
       className="feed__post"
       tweet={tweet}
       key={tweet.id}
-      visitUserTimeline={visitUserTimeline}
+      visitUserProfile={visitUserProfile}
     />
   })
 
@@ -18,7 +18,7 @@ function Feed({ timeline, visitUserTimeline }) {
       <div className="feed__header">
         <h2>Home</h2>
       </div>
-      <TweetBox />
+      <TweetBox loggedInUserAvatarUrl={loggedInUserAvatarUrl} />
       <div>
         {posts}
       </div>

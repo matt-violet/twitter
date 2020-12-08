@@ -7,10 +7,10 @@ import RepeatIcon from "@material-ui/icons/Repeat";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import PublishIcon from "@material-ui/icons/Publish";
 
-function Post({ tweet, visitUserTimeline }) {
+function Post({ tweet, visitUserProfile }) {
   return (
     <div className="post">
-      <div className="post__avatar" onClick={() => visitUserTimeline(tweet.user.screen_name)}>
+      <div className="post__avatar" onClick={() => visitUserProfile(tweet.user.screen_name)}>
         <Avatar src={tweet.user.profile_image_url_https} />
       </div>
       <div className="post__body">

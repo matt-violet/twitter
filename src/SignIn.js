@@ -1,12 +1,12 @@
 import React from 'react';
 import './SignIn.css';
 
-function SignIn(props) {
+function SignIn({ signInUser }) {
   return (
     <div className="signIn">
       <button
         className="signIn__button"
-        onClick={() => props.signInUser()}
+        onClick={() => signInUser('ayedoemateo')}
       >Sign In</button>
     </div>
   )

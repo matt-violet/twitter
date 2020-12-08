@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { fetchHomeTimeline, fetchUserTimeline, fetchUser } from './utils/utils.js';
 import './App.css';
 import SignIn from './SignIn';
 import Sidebar from './Sidebar';
@@ -12,80 +13,88 @@ class App extends Component {
     this.state = {
       isLoggedIn: false,
       currentPage: "",
-      featuredUser: "ayedoemateo",
+      loggedInUser: {},
       homeTimeline: [],
-      profileTimeline: [],
-      userTimeline: []
+      loggedInUserTweets: [],
+      featuredProfileTweets: []
     }
     this.signInUser = this.signInUser.bind(this);
     this.updateCurrentPage = this.updateCurrentPage.bind(this);
-    this.visitUserTimeline = this.visitUserTimeline.bind(this);
+    this.visitUserProfile = this.visitUserProfile.bind(this);
   }
 
-  async signInUser() {
-    const response = await fetch('/timeline');
-    const res = await response.json();
+  async signInUser(user) {
+    const homeTimeline = await fetchHomeTimeline();
+    const loggedInUser = await fetchUser(user);
+
     this.setState({
       isLoggedIn: true,
       currentPage: "Home",
-      homeTimeline: res
+      homeTimeline: homeTimeline,
+      loggedInUser: loggedInUser
     })
   }
 
-  async visitUserTimeline(user) {
-    const { profileTimeline } = this.state;
+  async visitUserProfile(username) {
+    const { loggedInUserTweets } = this.state;
+    const featuredProfileTweets = await fetchUserTimeline(username)
 
-    if (user === 'ayedoemateo') {
-      if (profileTimeline.length) {
+    if (username === 'ayedoemateo') {
+      if (loggedInUserTweets.length) {
         this.setState({
           currentPage: "Profile",
-          featuredUser: "ayedoemateo"
+          featuredProfileTweets
         })
         return;
       } else {
-        const response = await fetch(`/timeline/${user}`);
-        const res = await response.json();
         this.setState({
           currentPage: "Profile",
-          featuredUser: "ayedoemateo",
-          profileTimeline: res
+          loggedInUserTweets: featuredProfileTweets,
+          featuredProfileTweets
         })
       }
       return;
     }
-    const response = await fetch(`/timeline/${user}`);
-    const res = await response.json();
     this.setState({
       currentPage: "Profile",
-      userTimeline: res,
-      featuredUser: user
+      featuredProfileTweets
     })
   }
 
   updateCurrentPage(page) {
     this.setState({
-      currentPage: page,
-      featuredUser: "ayedoemateo"
+      currentPage: page
     })
   }
 
   render() {
-    let { isLoggedIn, currentPage, homeTimeline, featuredUser, profileTimeline, userTimeline } = this.state;
+    const { isLoggedIn, currentPage, homeTimeline, loggedInUser, featuredProfileTweets } = this.state;
     const renderCurrentPage = () => {
       switch(currentPage) {
         case "Home":
-          return <Feed timeline={homeTimeline} visitUserTimeline={this.visitUserTimeline} />;
+        return <Feed
+          loggedInUserAvatarUrl={loggedInUser.profile_image_url}
+          homeTimeline={homeTimeline}
+          visitUserProfile={this.visitUserProfile}
+        />;
         case "Profile":
-          return <Profile timeline={profileTimeline} visitUserTimeline={this.visitUserTimeline} />
+          return <Profile
+            timeline={featuredProfileTweets}
+            visitUserProfile={this.visitUserProfile}
+          />
         default:
-          return <Feed timeline={homeTimeline} visitUserTimeline={this.visitUserTimeline} />;
+          return <Feed
+            loggedInUserAvatarUrl={loggedInUser.profile_image_url}
+            homeTimeline={homeTimeline}
+            visitUserProfile={this.visitUserProfile}
+          />;
       }
     }
 
     if (isLoggedIn) {
       return (
         <div className="app">
-          <Sidebar updateCurrentPage={this.updateCurrentPage} visitUserTimeline={this.visitUserTimeline} />
+          <Sidebar updateCurrentPage={this.updateCurrentPage} visitUserProfile={this.visitUserProfile} />
           <div className="currentPage">
             {renderCurrentPage(currentPage)}
           </div>
