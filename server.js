@@ -19,21 +19,33 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/timeline', (req, res) => {
   client.get('https://api.twitter.com/1.1/statuses/home_timeline.json', { screen_name: 'ayedoemateo' }, (error, data) => {
     console.log('fetching home feed')
-    error ? console.log('ERROR: ', error) : res.send(data)
+    if (error) {
+      console.log('ERROR: ', error)
+    } else {
+      res.send(data)
+    }
   });
 })
 
 app.get('/timeline/:user', (req, res) => {
   client.get(`https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=${req.params.user}`, (error, data) => {
     console.log(`fetching ${req.params.user}'s feed`)
-    error ? console.log('ERROR: ', error) : res.send(data)
+    if (error) {
+      console.log('ERROR: ', error)
+    } else {
+      res.send(data)
+    }
   })
 })
 
 app.get('/users/:user', (req, res) => {
   client.get(`https://api.twitter.com/1.1/users/show.json?screen_name=${req.params.user}`, (error, data) => {
     console.log(`fetching user ${req.params.user}`)
-    error ? console.log('ERROR: ', error) : res.send(data)
+    if (error) {
+      console.log('ERROR: ', error)
+    } else {
+      res.send(data)
+    }
   })
 })
 
@@ -42,5 +54,5 @@ app.get('/', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+  console.log(`Listening at http://localhost:${port}`)
 });

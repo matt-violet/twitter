@@ -2,17 +2,39 @@
   text-align: center;
 }
 
+.signIn__header {
+  margin: 200px auto 100px auto;
+}
+
+.signIn__icon {
+  color: var(--twitter-color);
+}
+
+.signIn__headerText {
+  display: inline-block;
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 0 10px;
+  transform: translateY(-3px);
+}
+
 .signIn__button {
-  margin: auto;
-  width: 100px;
-  height: 50px;
-  transform: translateY(-25px);
-  padding: 10px;
-  position: absolute;
+  width: 150px;
+  background: var(--twitter-color);
+  color: white;
+  border: 0;
+  border-radius: 30px;
+  font-size: 20px;
+  font-weight: 600;
+  padding: 15px;
   top: 0;
   bottom: 0;
 }
 
 .signIn__button:hover {
   cursor: pointer;
+  background: white;
+  color: var(--twitter-color);
+  border: 3px solid var(--twitter-color);
+  transition: .3s;
 }
