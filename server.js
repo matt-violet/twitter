@@ -49,6 +49,17 @@ app.get('/users/:user', (req, res) => {
   })
 })
 
+app.get('/search/tweets/:query', (req, res) => {
+  client.get(`https://api.twitter.com/1.1/search/tweets.json?q=${req.params.query}&result_type=popular`, (error, data) => {
+    console.log(`searching for ${req.params.query}`)
+    if (error) {
+      console.log('ERROR: ', error)
+    } else {
+      res.send(data)
+    }
+  })
+})
+
 app.get('/', (req, res) => {
   res.send('Welcome to Twitter Clone!')
 });

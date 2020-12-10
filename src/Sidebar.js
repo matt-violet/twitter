@@ -17,7 +17,7 @@ function Sidebar({ updateCurrentPage, visitUserProfile }) {
     <div className="sidebar">
       <TwitterIcon className="sidebar__twitterIcon"/>
       <SidebarOption active Icon={HomeIcon} text="Home" updateCurrentPage={updateCurrentPage} />
-      <SidebarOption Icon={SearchIcon} text="Explore" />
+      <SidebarOption Icon={SearchIcon} text="Explore" updateCurrentPage={updateCurrentPage} visitUserProfile={visitUserProfile} />
       <SidebarOption Icon={NotificationsNoneIcon} text="Notifications" />
       <SidebarOption Icon={MailOutlineIcon} text="Messages" />
       <SidebarOption Icon={BookmarkBorderIcon} text="Bookmarks" />

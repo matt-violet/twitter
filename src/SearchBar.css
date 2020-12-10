@@ -1,0 +1,22 @@
+.searchbar {
+  display: flex;
+  align-items: center;
+  background-color: var(--twitter-background);
+  padding: 10px;
+  border-radius: 20px;
+}
+
+.searchbar__searchIcon {
+  color: gray;
+}
+
+.searchbar__form {
+  width: 100%;
+  display: inline-block;
+}
+
+.searchbar__form > input {
+  width: 95%;
+  border: none;
+  background-color: var(--twitter-background);
+}

@@ -8,7 +8,7 @@ This project uses version 10 of Node, and is started by running `npm start` and 
 
 ## Technologies / Libraries Used
 
-* React
+* React (with hooks)
 
 * CSS3
   * CSS variables
@@ -25,7 +25,9 @@ This project uses version 10 of Node, and is started by running `npm start` and 
   * GET statuses/user_timeline
     * "Returns a collection of the most recent Tweets posted by the user indicated by the `screen_name` or `user_id` parameters."
   * GET users/show
-    * "Returns a variety of information about the user specified by the required `user_id` or `screen_name` parameter. The author's most recent Tweet will be returned inline when possible." 
+    * "Returns a variety of information about the user specified by the required `user_id` or `screen_name` parameter. The author's most recent Tweet will be returned inline when possible."
+  * GET search/tweets
+    * "Returns a collection of relevant Tweets matching a specified query."
 
 * React-Twitter-Embed
   * TwitterShareButton

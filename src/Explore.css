@@ -1,0 +1,45 @@
+.explore {
+  flex: 0.4;
+  border-right: 1px solid var(--twitter-background);
+}
+
+.explore__header {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  background-color: white;
+  z-index: 100;
+}
+
+.explore__searchbar {
+  padding: 15px 20px;
+}
+
+.explore__links {
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid lightgrey;
+}
+
+.explore__link {
+  padding: 15px;
+  font-size: 15px;
+  font-weight: 700;
+  color: grey;
+  flex: 5;
+  text-align: center;
+}
+
+.explore__link:hover {
+  background: var(--twitter-background);
+  color: var(--twitter-color);
+  transition: .3s;
+  cursor: pointer;
+}
+
+.explore__link--selected {
+  color: var(--twitter-color);
+  border-bottom: 2px solid var(--twitter-color);
+}

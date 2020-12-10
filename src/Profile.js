@@ -1,21 +1,12 @@
 import React from 'react';
 import './Profile.css';
-import Post from './Post';
 import moment from 'moment';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import DateRangeIcon from '@material-ui/icons/DateRange';
 
-function Profile({ timeline, visitUserProfile }) {
+function Profile({ timeline, generatePosts }) {
   const user = timeline[0].user;
-  const posts = timeline.map((tweet) => {
-    return <Post
-      className="profile__post"
-      tweet={tweet}
-      key={tweet.id}
-      visitUserProfile={visitUserProfile}
-    />
-  });
 
   return (
     <div className="profile">
@@ -54,7 +45,7 @@ function Profile({ timeline, visitUserProfile }) {
         <div className="profile__link">Likes</div>
       </div>
       <div>
-        {posts}
+        {generatePosts(timeline)}
       </div>
     </div>
   )

@@ -15,3 +15,9 @@ export async function fetchUser(username) {
   const userObjJSON = await userObj.json();
   return userObjJSON;
 }
+
+export async function searchTweets(query) {
+  const tweets = await fetch(`/search/tweets/${query}`);
+  const tweetsJSON = await tweets.json();
+  return tweetsJSON;
+}

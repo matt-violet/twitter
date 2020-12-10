@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { fetchHomeTimeline, fetchUserTimeline, fetchUser } from './utils/utils.js';
+import { fetchHomeTimeline, fetchUserTimeline, fetchUser, searchTweets } from './utils/utils.js';
 import './App.css';
 import SignIn from './SignIn';
 import Sidebar from './Sidebar';
 import Feed from './Feed';
 import Profile from './Profile';
 import Widgets from './Widgets';
+import Explore from './Explore';
+import Post from './Post';
 
 class App extends Component {
   constructor(props) {
@@ -16,11 +18,15 @@ class App extends Component {
       loggedInUser: {},
       homeTimeline: [],
       loggedInUserTweets: [],
-      featuredProfileTweets: []
+      featuredProfileTweets: [],
+      queryResults: {},
+      submittedQuery: ""
     }
     this.signInUser = this.signInUser.bind(this);
     this.updateCurrentPage = this.updateCurrentPage.bind(this);
     this.visitUserProfile = this.visitUserProfile.bind(this);
+    this.handleSearchTweets = this.handleSearchTweets.bind(this);
+    this.generatePosts = this.generatePosts.bind(this);
   }
 
   async signInUser(user) {
@@ -31,7 +37,7 @@ class App extends Component {
       isLoggedIn: true,
       currentPage: "Home",
       homeTimeline: homeTimeline,
-      loggedInUser: loggedInUser
+      loggedInUser: loggedInUser,
     })
   }
 
@@ -61,32 +67,60 @@ class App extends Component {
     })
   }
 
+  generatePosts(tweets) {
+    const posts = tweets.map((tweet) => {
+      return <Post
+        className="feed__post"
+        tweet={tweet}
+        key={tweet.id}
+        visitUserProfile={this.visitUserProfile}
+      />
+    })
+    return posts;
+  }
+
   updateCurrentPage(page) {
     this.setState({
       currentPage: page
     })
   }
 
+  async handleSearchTweets(query) {
+    const queryResults = await searchTweets(query);
+
+    this.setState({
+      currentPage: "Explore",
+      queryResults,
+      submittedQuery: query
+    })
+  }
+
   render() {
-    const { isLoggedIn, currentPage, homeTimeline, loggedInUser, featuredProfileTweets } = this.state;
+    const { isLoggedIn, currentPage, homeTimeline, loggedInUser, featuredProfileTweets, queryResults } = this.state;
     const renderCurrentPage = () => {
       switch(currentPage) {
         case "Home":
-        return <Feed
-          loggedInUserAvatarUrl={loggedInUser.profile_image_url}
-          homeTimeline={homeTimeline}
-          visitUserProfile={this.visitUserProfile}
-        />;
+          return <Feed
+            loggedInUserAvatarUrl={loggedInUser.profile_image_url}
+            homeTimeline={homeTimeline}
+            generatePosts={this.generatePosts}
+          />;
+        case "Explore":
+          return <Explore
+            queryResults={queryResults}
+            generatePosts={this.generatePosts}
+            handleSearchTweets={this.handleSearchTweets}
+          />;
         case "Profile":
           return <Profile
             timeline={featuredProfileTweets}
-            visitUserProfile={this.visitUserProfile}
-          />
+            generatePosts={this.generatePosts}
+          />;
         default:
           return <Feed
             loggedInUserAvatarUrl={loggedInUser.profile_image_url}
             homeTimeline={homeTimeline}
-            visitUserProfile={this.visitUserProfile}
+            generatePosts={this.generatePosts}
           />;
       }
     }
@@ -98,7 +132,10 @@ class App extends Component {
           <div className="currentPage">
             {renderCurrentPage(currentPage)}
           </div>
-          <Widgets />
+          <Widgets
+            handleSearchTweets={this.handleSearchTweets}
+            currentPage={currentPage}
+          />
         </div>
       )
     }
