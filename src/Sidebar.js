@@ -18,12 +18,12 @@ function Sidebar({ updateCurrentPage, visitUserProfile }) {
       <TwitterIcon className="sidebar__twitterIcon"/>
       <SidebarOption active Icon={HomeIcon} text="Home" updateCurrentPage={updateCurrentPage} />
       <SidebarOption Icon={SearchIcon} text="Explore" updateCurrentPage={updateCurrentPage} visitUserProfile={visitUserProfile} />
-      <SidebarOption Icon={NotificationsNoneIcon} text="Notifications" />
-      <SidebarOption Icon={MailOutlineIcon} text="Messages" />
-      <SidebarOption Icon={BookmarkBorderIcon} text="Bookmarks" />
-      <SidebarOption Icon={ListAltIcon} text="Lists" />
-      <SidebarOption Icon={PermIdentityIcon} text="Profile" visitUserProfile={visitUserProfile} />
-      <SidebarOption Icon={MoreHorizIcon} text="More" />
+      <SidebarOption Icon={NotificationsNoneIcon} text="Notifications" updateCurrentPage={updateCurrentPage} />
+      <SidebarOption Icon={MailOutlineIcon} text="Messages" updateCurrentPage={updateCurrentPage} />
+      <SidebarOption Icon={BookmarkBorderIcon} text="Bookmarks" updateCurrentPage={updateCurrentPage} />
+      <SidebarOption Icon={ListAltIcon} text="Lists" updateCurrentPage={updateCurrentPage} />
+      <SidebarOption Icon={PermIdentityIcon} text="Profile" updateCurrentPage={updateCurrentPage} visitUserProfile={visitUserProfile} />
+      <SidebarOption Icon={MoreHorizIcon} text="More" updateCurrentPage={updateCurrentPage} />
       <Button variant="outlined" className="sidebar__tweet" fullWidth>Tweet</Button>
     </div>
   )

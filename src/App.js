@@ -117,11 +117,7 @@ class App extends Component {
             generatePosts={this.generatePosts}
           />;
         default:
-          return <Feed
-            loggedInUserAvatarUrl={loggedInUser.profile_image_url}
-            homeTimeline={homeTimeline}
-            generatePosts={this.generatePosts}
-          />;
+          return null
       }
     }
 
