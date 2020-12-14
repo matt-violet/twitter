@@ -36,8 +36,8 @@ class App extends Component {
     this.setState({
       isLoggedIn: true,
       currentPage: "Home",
-      homeTimeline: homeTimeline,
-      loggedInUser: loggedInUser,
+      homeTimeline,
+      loggedInUser
     })
   }
 
@@ -124,7 +124,7 @@ class App extends Component {
     if (isLoggedIn) {
       return (
         <div className="app">
-          <Sidebar updateCurrentPage={this.updateCurrentPage} visitUserProfile={this.visitUserProfile} />
+          <Sidebar updateCurrentPage={this.updateCurrentPage} visitUserProfile={this.visitUserProfile} currentPage={currentPage} />
           <div className="currentPage">
             {renderCurrentPage(currentPage)}
           </div>

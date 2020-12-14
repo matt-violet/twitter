@@ -12,18 +12,18 @@ import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import { Button } from '@material-ui/core';
 
-function Sidebar({ updateCurrentPage, visitUserProfile }) {
+function Sidebar({ currentPage, updateCurrentPage, visitUserProfile }) {
   return (
     <div className="sidebar">
       <TwitterIcon className="sidebar__twitterIcon"/>
-      <SidebarOption active Icon={HomeIcon} text="Home" updateCurrentPage={updateCurrentPage} />
-      <SidebarOption Icon={SearchIcon} text="Explore" updateCurrentPage={updateCurrentPage} visitUserProfile={visitUserProfile} />
-      <SidebarOption Icon={NotificationsNoneIcon} text="Notifications" updateCurrentPage={updateCurrentPage} />
-      <SidebarOption Icon={MailOutlineIcon} text="Messages" updateCurrentPage={updateCurrentPage} />
-      <SidebarOption Icon={BookmarkBorderIcon} text="Bookmarks" updateCurrentPage={updateCurrentPage} />
-      <SidebarOption Icon={ListAltIcon} text="Lists" updateCurrentPage={updateCurrentPage} />
-      <SidebarOption Icon={PermIdentityIcon} text="Profile" updateCurrentPage={updateCurrentPage} visitUserProfile={visitUserProfile} />
-      <SidebarOption Icon={MoreHorizIcon} text="More" updateCurrentPage={updateCurrentPage} />
+      <SidebarOption active={currentPage === "Home"} Icon={HomeIcon} text="Home" updateCurrentPage={updateCurrentPage} />
+      <SidebarOption active={currentPage === "Explore"} Icon={SearchIcon} text="Explore" updateCurrentPage={updateCurrentPage} visitUserProfile={visitUserProfile} />
+      <SidebarOption active={currentPage === "Notifications"} Icon={NotificationsNoneIcon} text="Notifications" updateCurrentPage={updateCurrentPage} />
+      <SidebarOption active={currentPage === "Messages"} Icon={MailOutlineIcon} text="Messages" updateCurrentPage={updateCurrentPage} />
+      <SidebarOption active={currentPage === "Bookmarks"} Icon={BookmarkBorderIcon} text="Bookmarks" updateCurrentPage={updateCurrentPage} />
+      <SidebarOption active={currentPage === "Lists"} Icon={ListAltIcon} text="Lists" updateCurrentPage={updateCurrentPage} />
+      <SidebarOption active={currentPage === "Profile"} Icon={PermIdentityIcon} text="Profile" updateCurrentPage={updateCurrentPage} visitUserProfile={visitUserProfile} />
+      <SidebarOption active={currentPage === "More"} Icon={MoreHorizIcon} text="More" updateCurrentPage={updateCurrentPage} />
       <Button variant="outlined" className="sidebar__tweet" fullWidth>Tweet</Button>
     </div>
   )
